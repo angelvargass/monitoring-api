@@ -1,0 +1,22 @@
+name: goreleaser-and-deploy
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build-scan-push:
+    uses: angelvargass/reusable-workflows/.github/workflows/reusable-docker-build-scan-push.yaml@v1
+    with:
+      registry: docker.io
+      image_name: 'monitoring-api'
+      image_tag: ${{ github.ref_name }}
+      dockerfile_path: '.'
+    secrets:
+      docker_username: ${{ vars.DOCKERHUB_USERNAME }}
+      docker_password: ${{ secrets.DOCKERHUB_TOKEN }}

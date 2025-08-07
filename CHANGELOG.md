@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/angelvargass/monitoring-api/compare/v1.0.0...v1.1.0) (2025-08-07)
+
+
+### Features
+
+* add hostname and stress test with k6 ([#4](https://github.com/angelvargass/monitoring-api/issues/4)) ([074f5a3](https://github.com/angelvargass/monitoring-api/commit/074f5a345bef3cda3e7c7ffbe2d256d884c28284))
+
 ## 1.0.0 (2025-08-06)
 
 

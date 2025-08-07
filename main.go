@@ -30,6 +30,11 @@ func otelHandler(w http.ResponseWriter, r *http.Request) { //nolint:unparam,revi
 	w.Write([]byte("Hello from OTEL traced API!\n")) //nolint:errcheck
 }
 
+func hostnameHandler(w http.ResponseWriter, r *http.Request) { //nolint:unparam,revive
+	hostname, _ := os.Hostname()
+	w.Write([]byte("hello from host: " + hostname)) //nolint:errcheck
+}
+
 func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
 	defer stop()
@@ -49,6 +54,7 @@ func main() {
 	mux.HandleFunc("/error", errorHandler)
 	mux.HandleFunc("/ready", readyHandler)
 	mux.HandleFunc("/healthz", healthzHandler)
+	mux.HandleFunc("/hostname", hostnameHandler)
 
 	slog.Info("listening", slog.Int("port", 8080))
 	err := http.ListenAndServe(":8080", mux) //nolint:errcheck,gosec
